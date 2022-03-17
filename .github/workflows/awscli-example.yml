@@ -8,14 +8,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: mkdir -p path/to/artifact
-    - run: echo hello > path/to/artifact/world.txt
-    
+    - uses: actions/checkout@v2   
     - uses: actions/upload-artifact@v2
       with:
         name: deploy
-        path: path/to/artifact/world.txt
+        path: README.md
 
   deploy:
     runs-on: ubuntu-latest
@@ -29,5 +26,5 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: deploy
-        path: path/to/artifact/world.txt
-    - run: aws s3 cp path/to/artifact/world.txt s3://devops-fabiorodrigues --recursive --acl public-read 
+        path: README.md
+    - run: aws s3 cp README.md s3://devops-fabiorodrigues --recursive --acl public-read  
